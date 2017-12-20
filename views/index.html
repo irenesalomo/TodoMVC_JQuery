@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="../public/css/index.css">
 		<link rel="stylesheet" href="../public/css/app.css">
 	</head>
+    
 	<body>
 		<section id="todoapp">
 			<header id="header">
@@ -26,8 +27,13 @@
 			<p>Created by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
 			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 		</footer>
+        
+        <!-- Template for todo list section-->
 		<script id="todo-template" type="text/x-handlebars-template">
 			{{#this}}
+
+            <!--This following <li> elements will sit inside the above <ul id="todo-list">-->
+
 			<li {{#if completed}}class="completed"{{/if}} data-id="{{id}}">
 				<div class="view">
 					<input class="toggle" type="checkbox" {{#if completed}}checked{{/if}}>
@@ -38,6 +44,8 @@
 			</li>
 		{{/this}}
 		</script>
+        
+        <!-- Template for footer section-->
 		<script id="footer-template" type="text/x-handlebars-template">
 			<span id="todo-count"><strong>{{activeTodoCount}}</strong> {{activeTodoWord}} left</span>
 			<ul id="filters">
@@ -51,11 +59,14 @@
 					<a {{#eq filter 'completed'}}class="selected"{{/eq}}href="#/completed">Completed</a>
 				</li>
 			</ul>
+
+        <!-- If there is any completed task, show below clear completed link on footer section-->
 			{{#if completedTodos}}<button id="clear-completed">Clear completed</button>{{/if}}
 		</script>
+        
 		<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
-		<script src="js/director.js"></script>
-		<script src="js/app.js"></script>
+		<script src="../public/js/director.js"></script>
+		<script src="../public/js/app.js"></script>
 	</body>
 </html>
