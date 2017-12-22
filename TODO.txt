@@ -2,5 +2,7 @@ Project improvement ideas:
 1. Display label for toggle all for better user friendliness
 
 
-To be researched:
-1. Check how the handlebars workf
+Unfamiliar code:
+1. Handlebars 
+2. Router
+3. localStorage

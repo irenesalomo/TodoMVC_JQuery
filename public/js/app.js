@@ -2,6 +2,7 @@
 jQuery(function ($) {
 	'use strict';
 
+    //This is part of Handlebars templating
 	Handlebars.registerHelper('eq', function (a, b, options) {
 		return a === b ? options.fn(this) : options.inverse(this);
 	});
@@ -9,6 +10,7 @@ jQuery(function ($) {
 	var ENTER_KEY = 13;
 	var ESCAPE_KEY = 27;
 
+//    This object is to store common used functions/utilities
 	var util = {
 		uuid: function () {
 			/*jshint bitwise:false */
