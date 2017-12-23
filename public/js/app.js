@@ -54,7 +54,9 @@ jQuery(function ($) {
 				}.bind(this)
 			}).init('/all');
 		},
+//        This method is to bind different event behaviours on this app
 		bindEvents: function () {
+//when the user releases a key on the keyboard at #new-todo input element, call this.create method and bind the this, because otherwise the 'this' refers to #new-todo element, instead of App object
 			$('#new-todo').on('keyup', this.create.bind(this));
 			$('#toggle-all').on('change', this.toggleAll.bind(this));
 			$('#footer').on('click', '#clear-completed', this.destroyCompleted.bind(this));

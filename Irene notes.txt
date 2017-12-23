@@ -1,4 +1,4 @@
-Project improvement ideas:
+TODO MVC Project improvement ideas:
 1. Display label for toggle all for better user friendliness
 
 
