@@ -28,11 +28,10 @@
 			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 		</footer>
         
+        <!--This following <li> elements will sit inside the above <ul id="todo-list">-->
         <!-- Template for todo list section-->
 		<script id="todo-template" type="text/x-handlebars-template">
 			{{#this}}
-
-            <!--This following <li> elements will sit inside the above <ul id="todo-list">-->
 
 			<li {{#if completed}}class="completed"{{/if}} data-id="{{id}}">
 				<div class="view">

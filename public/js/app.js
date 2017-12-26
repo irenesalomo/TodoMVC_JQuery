@@ -12,6 +12,7 @@ jQuery(function ($) {
 
 //    This object is to store common used functions/utilities
 	var util = {
+//        uuid method is to generate ID for each todo task
 		uuid: function () {
 			/*jshint bitwise:false */
 			var i, random;
@@ -46,7 +47,7 @@ jQuery(function ($) {
 			this.todoTemplate = Handlebars.compile($('#todo-template').html());
 			this.footerTemplate = Handlebars.compile($('#footer-template').html());
 			this.bindEvents();
-
+            debugger;
 			new Router({
 				'/:filter': function (filter) {
 					this.filter = filter;
@@ -59,7 +60,9 @@ jQuery(function ($) {
 //when the user releases a key on the keyboard at #new-todo input element, call this.create method and bind the this, because otherwise the 'this' refers to #new-todo element, instead of App object
 			$('#new-todo').on('keyup', this.create.bind(this));
 			$('#toggle-all').on('change', this.toggleAll.bind(this));
+//call destroyCompleted method when #clear-completed button on #footer element is clicked             
 			$('#footer').on('click', '#clear-completed', this.destroyCompleted.bind(this));
+//set the method to be called when event happened on different #todo-list's child element             
 			$('#todo-list')
 				.on('change', '.toggle', this.toggle.bind(this))
 				.on('dblclick', 'label', this.edit.bind(this))
@@ -70,7 +73,12 @@ jQuery(function ($) {
 		render: function () {
 			var todos = this.getFilteredTodos();
 			$('#todo-list').html(this.todoTemplate(todos));
+            
+//            Show #main element only when todos.length > 0
 			$('#main').toggle(todos.length > 0);
+
+//            Set the #toggle-all checked property to true/false depending on whether this.getActiveTodos().length === 0
+            
 			$('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
 			this.renderFooter();
 			$('#new-todo').focus();
@@ -166,6 +174,9 @@ jQuery(function ($) {
 		editKeyup: function (e) {
 			if (e.which === ENTER_KEY) {
 				e.target.blur();
+//above line can be replaced by				
+//$(".edit").focusout();
+
 			}
 
 			if (e.which === ESCAPE_KEY) {

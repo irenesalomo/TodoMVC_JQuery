@@ -1,5 +1,7 @@
 TODO MVC Project improvement ideas:
 1. Display label for toggle all for better user friendliness
+2. Following code set the #toggle-all checked property to true/false depending on whether this.getActiveTodos().length === 0, however I noticed its parent element - #main actually is hidden when this.getActiveTodos().length === 0, so this might potentially be improved 
+			$('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
 
 
 Unfamiliar code:
