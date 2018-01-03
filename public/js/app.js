@@ -31,10 +31,23 @@ jQuery(function ($) {
 		pluralize: function (count, word) {
 			return count === 1 ? word : word + 's';
 		},
+        retrieve: function(namespace){
+            var retrievedData = localStorage.getItem(namespace);
+            return (retrievedData && JSON.parse(retrievedData)) || []; 
+            if (retrievedData)
+                return JSON.parse(retrievedData);
+            else
+                return [];
+        },
 		store: function (namespace, data) {
-			if (arguments.length > 1) {
-				return localStorage.setItem(namespace, JSON.stringify(data));
-			} else {
+            
+// condition for storing new added todos
+        if (arguments.length > 1) {
+            return localStorage.setItem(namespace, JSON.stringify(data));
+			
+// condition for retrieving stored todos
+
+            } else {
 				var store = localStorage.getItem(namespace);
 				return (store && JSON.parse(store)) || [];
 			}
@@ -43,11 +56,11 @@ jQuery(function ($) {
 
 	var App = {
 		init: function () {
-			this.todos = util.store('todos-jquery');
+//            debugger;
+			this.todos = util.retrieve('todos-jquery');
 			this.todoTemplate = Handlebars.compile($('#todo-template').html());
 			this.footerTemplate = Handlebars.compile($('#footer-template').html());
 			this.bindEvents();
-            debugger;
 			new Router({
 				'/:filter': function (filter) {
 					this.filter = filter;
@@ -60,9 +73,11 @@ jQuery(function ($) {
 //when the user releases a key on the keyboard at #new-todo input element, call this.create method and bind the this, because otherwise the 'this' refers to #new-todo element, instead of App object
 			$('#new-todo').on('keyup', this.create.bind(this));
 			$('#toggle-all').on('change', this.toggleAll.bind(this));
+            
 //call destroyCompleted method when #clear-completed button on #footer element is clicked             
-			$('#footer').on('click', '#clear-completed', this.destroyCompleted.bind(this));
-//set the method to be called when event happened on different #todo-list's child element             
+            $('#footer').on('click', '#clear-completed', this.destroyCompleted.bind(this));
+            
+//set the method to be called when event happened on different #todo-list's child element         
 			$('#todo-list')
 				.on('change', '.toggle', this.toggle.bind(this))
 				.on('dblclick', 'label', this.edit.bind(this))
@@ -70,18 +85,22 @@ jQuery(function ($) {
 				.on('focusout', '.edit', this.update.bind(this))
 				.on('click', '.destroy', this.destroy.bind(this));
 		},
+        
 		render: function () {
+//            debugger;
 			var todos = this.getFilteredTodos();
 			$('#todo-list').html(this.todoTemplate(todos));
             
-//            Show #main element only when todos.length > 0
+// Show #main element only when todos.length > 0
 			$('#main').toggle(todos.length > 0);
 
-//            Set the #toggle-all checked property to true/false depending on whether this.getActiveTodos().length === 0
+//Set the #toggle-all checked property to true/false depending on whether this.getActiveTodos().length === 0
             
 			$('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
 			this.renderFooter();
 			$('#new-todo').focus();
+            
+//Update localStorage after every update or new todos added 
 			util.store('todos-jquery', this.todos);
 		},
 		renderFooter: function () {

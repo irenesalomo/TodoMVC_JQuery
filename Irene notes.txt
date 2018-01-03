@@ -8,3 +8,11 @@ Unfamiliar code:
 1. Handlebars 
 2. Router
 3. localStorage
+
+Notes on some lessons learned:
+&& returns first falsy value evaluated, if all are truthy returns last value (which is truthy). This is useful to replace IF statement
+
+|| returns first truthy value evaluated, if all are falsy returns last value (which is falsy). This is useful to replace ELSE statement or assigning defaul value 
+
+Sample code from app.js
+return (store && JSON.parse(store)) || [];
