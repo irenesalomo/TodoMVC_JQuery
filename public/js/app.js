@@ -31,26 +31,23 @@ jQuery(function ($) {
 		pluralize: function (count, word) {
 			return count === 1 ? word : word + 's';
 		},
+
+// retrieving stored todos
+        
         retrieve: function(namespace){
             var retrievedData = localStorage.getItem(namespace);
             return (retrievedData && JSON.parse(retrievedData)) || []; 
-            if (retrievedData)
-                return JSON.parse(retrievedData);
-            else
-                return [];
+//            if (retrievedData)
+//                return JSON.parse(retrievedData);
+//            else
+//                return [];
         },
 		store: function (namespace, data) {
             
 // condition for storing new added todos
-        if (arguments.length > 1) {
-            return localStorage.setItem(namespace, JSON.stringify(data));
-			
-// condition for retrieving stored todos
-
-            } else {
-				var store = localStorage.getItem(namespace);
-				return (store && JSON.parse(store)) || [];
-			}
+            if (arguments.length > 1) {
+                return localStorage.setItem(namespace, JSON.stringify(data));
+            } 
 		}
 	};
 
