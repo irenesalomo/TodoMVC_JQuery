@@ -10,9 +10,9 @@ jQuery(function ($) {
 	var ENTER_KEY = 13;
 	var ESCAPE_KEY = 27;
 
-//    This object is to store common used functions/utilities
+    //This object is to store common used functions/utilities
 	var util = {
-//        uuid method is to generate ID for each todo task
+    //uuid method is to generate ID for each todo task
 		uuid: function () {
 			/*jshint bitwise:false */
 			var i, random;
@@ -32,28 +32,25 @@ jQuery(function ($) {
 			return count === 1 ? word : word + 's';
 		},
 
-// retrieving stored todos
+        // retrieving stored todos
         
         retrieve: function(namespace){
             var retrievedData = localStorage.getItem(namespace);
             return (retrievedData && JSON.parse(retrievedData)) || []; 
-//            if (retrievedData)
-//                return JSON.parse(retrievedData);
-//            else
-//                return [];
+            //Above line is equal to following lines
+            //if (retrievedData)
+            //    return JSON.parse(retrievedData);
+            //else
+            //    return [];
         },
 		store: function (namespace, data) {
-            
-// condition for storing new added todos
-            if (arguments.length > 1) {
-                return localStorage.setItem(namespace, JSON.stringify(data));
-            } 
+            // condition for storing new added todos
+            return localStorage.setItem(namespace, JSON.stringify(data));
 		}
 	};
 
 	var App = {
 		init: function () {
-//            debugger;
 			this.todos = util.retrieve('todos-jquery');
 			this.todoTemplate = Handlebars.compile($('#todo-template').html());
 			this.footerTemplate = Handlebars.compile($('#footer-template').html());
@@ -65,16 +62,16 @@ jQuery(function ($) {
 				}.bind(this)
 			}).init('/all');
 		},
-//        This method is to bind different event behaviours on this app
+        //This method is to bind different event behaviours on this app
 		bindEvents: function () {
-//when the user releases a key on the keyboard at #new-todo input element, call this.create method and bind the this, because otherwise the 'this' refers to #new-todo element, instead of App object
+            //when the user releases a key on the keyboard at #new-todo input element, call this.create method and bind the this, because otherwise the 'this' refers to #new-todo element, instead of App object
 			$('#new-todo').on('keyup', this.create.bind(this));
 			$('#toggle-all').on('change', this.toggleAll.bind(this));
             
-//call destroyCompleted method when #clear-completed button on #footer element is clicked             
+            //call destroyCompleted method when #clear-completed button on #footer element is clicked             
             $('#footer').on('click', '#clear-completed', this.destroyCompleted.bind(this));
             
-//set the method to be called when event happened on different #todo-list's child element         
+            //set the method to be called when event happened on different #todo-list's child element         
 			$('#todo-list')
 				.on('change', '.toggle', this.toggle.bind(this))
 				.on('dblclick', 'label', this.edit.bind(this))
@@ -84,20 +81,19 @@ jQuery(function ($) {
 		},
         
 		render: function () {
-//            debugger;
 			var todos = this.getFilteredTodos();
 			$('#todo-list').html(this.todoTemplate(todos));
             
-// Show #main element only when todos.length > 0
+            // Show #main element only when todos.length > 0
 			$('#main').toggle(todos.length > 0);
 
-//Set the #toggle-all checked property to true/false depending on whether this.getActiveTodos().length === 0
+            //Set the #toggle-all checked property to true/false depending on whether this.getActiveTodos().length === 0
             
 			$('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
 			this.renderFooter();
 			$('#new-todo').focus();
             
-//Update localStorage after every update or new todos added 
+            //Update localStorage after every update or new todos added 
 			util.store('todos-jquery', this.todos);
 		},
 		renderFooter: function () {
@@ -190,9 +186,8 @@ jQuery(function ($) {
 		editKeyup: function (e) {
 			if (e.which === ENTER_KEY) {
 				e.target.blur();
-//above line can be replaced by				
-//$(".edit").focusout();
-
+                //above line can be replaced by				
+                //$(".edit").focusout();
 			}
 
 			if (e.which === ESCAPE_KEY) {
