@@ -16,3 +16,22 @@ Notes on some lessons learned:
 
 Sample code from app.js
 return (store && JSON.parse(store)) || [];
+
+What I did to play around with .filter function:
+var todoList = {
+    todos: [
+        {
+            completed: true,
+            todoText: "item 1"
+        }, 
+        {
+            completed: false,
+            todoText: "item 2"
+        }
+    ]
+}
+
+var completedTodos = todoList.todos.filter(function(todo){
+    return todo.completed;
+});
+
