@@ -162,6 +162,7 @@ jQuery(function ($) {
             //}
 		},
 		create: function (e) {
+            //This first 3 lines of code is to prevent user inputting empty space as todolist
 			var $input = $(e.target);
 			var val = $input.val().trim();
 
