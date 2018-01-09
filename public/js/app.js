@@ -146,15 +146,20 @@ jQuery(function ($) {
 		// accepts an element from inside the `.item` div and
 		// returns the corresponding index in the `todos` array
 		indexFromEl: function (el) {
-			var id = $(el).closest('li').data('id');
-			var todos = this.todos;
-			var i = todos.length;
+            //My attempt to replace indexFromEl function with something simpler
+            var li = el.closest('li');
+            var i = $("#todo-list li").index(li);
+            return i;
 
-			while (i--) {
-				if (todos[i].id === id) {
-					return i;
-				}
-			}
+            //Original indexFromEl function
+            //var id = $(el).closest('li').data('id');
+            //var todos = this.todos;
+            //var i = todos.length;
+            //          //while (i--) {
+            //	if (todos[i].id === id) {
+            //		return i;
+            //	}
+            //}
 		},
 		create: function (e) {
 			var $input = $(e.target);
